@@ -30,7 +30,6 @@
       --radius-sm: 10px;
       --shadow:    0 25px 50px rgba(0,0,0,0.6);
     }
-    html { scroll-behavior: smooth; }
     body {
       background: var(--bg);
       color: var(--white);
@@ -338,6 +337,7 @@
     .marquee-container {
       overflow: hidden;
       user-select: none;
+      touch-action: pan-y;
       padding: 20px 0;
       position: relative;
       width: 100%;
