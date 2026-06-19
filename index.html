@@ -331,70 +331,67 @@
     }
     .why-card.featured .why-map-mini iframe { width: 100%; height: 100%; border: none; }
 
-    /* ===== INFINITE MARQUEE SLIDER ===== */
-    #gallery { background: var(--bg2); overflow: hidden; padding-bottom: 0px; }
-    
-    .marquee-container {
-      overflow: hidden;
-      user-select: none;
-      touch-action: pan-y;
-      padding: 20px 0;
+    /* ===== MANUAL SLIDER ===== */
+    #gallery { background: var(--bg2); padding-bottom: 40px; position: relative; }
+    .slider-wrapper {
       position: relative;
-      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px 60px;
     }
-    
-    /* Optional gradient masks to fade the edges like blaisetransit */
-    .marquee-container::before,
-    .marquee-container::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      width: 150px;
-      height: 100%;
-      z-index: 2;
-      pointer-events: none;
-    }
-    .marquee-container::before {
-      left: 0;
-      background: linear-gradient(to right, var(--bg2), transparent);
-    }
-    .marquee-container::after {
-      right: 0;
-      background: linear-gradient(to left, var(--bg2), transparent);
-    }
-
-    .marquee-track {
+    .slider-container {
       display: flex;
-      width: max-content;
-      gap: 10px;
-      animation: scroll 60s linear infinite;
+      gap: 30px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      scroll-behavior: smooth;
     }
-
+    .slider-container::-webkit-scrollbar {
+      display: none;
+    }
     .slide {
-      flex: 0 0 auto;
-      height: 186px;
-      min-width: 250px;
-      overflow: hidden;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      transform: translateZ(0); /* Fixes Safari overflow border-radius bug */
+      flex: 0 0 100%;
+      scroll-snap-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     .slide img {
-      height: 186px;
-      width: auto;
+      width: 100%;
+      height: auto;
+      max-height: 400px;
       object-fit: contain;
-      object-position: center;
-      display: block;
-      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border-radius: 12px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.6);
     }
-    .slide:hover img { 
-      transform: scale(1.02); 
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--white);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.3s;
+      font-size: 1.2rem;
+      user-select: none;
     }
-
-    @keyframes scroll {
-      from { transform: translateX(0); }
-      to { transform: translateX(calc(-50% - 5px)); }
+    .slider-btn:hover {
+      background: var(--blue);
+      border-color: var(--blue);
+      box-shadow: 0 0 20px rgba(59,130,246,0.4);
     }
+    .slider-btn.prev { left: 0px; }
+    .slider-btn.next { right: 0px; }
 
     /* ===== LOCATION ===== */
     #location { background: var(--bg); }
@@ -768,30 +765,20 @@
       <h2 class="section-title">See What's Possible</h2>
       <p class="section-desc">Browse sample billboard ad designs across different industries. Upload your own ad instantly or get a custom billboard design from Harmps Media.</p>
     </div>
-    <div class="marquee-container reveal">
-      <div class="marquee-track" id="marqueeTrack1">
-        <!-- Set 1 -->
+    <div class="slider-wrapper reveal">
+      <div class="slider-btn prev" id="sliderPrev">❮</div>
+      <div class="slider-btn next" id="sliderNext">❯</div>
+      <div class="slider-container" id="sliderContainer">
         <div class="slide"><img src="images 2/ad_design_law_1780795178561.png" alt="Law Ad" loading="lazy" /></div>
         <div class="slide"><img src="images 2/ad_burger_1780938257426.png" alt="Burger Ad" loading="lazy" /></div>
         <div class="slide"><img src="images 2/ad_design_realestate.png" alt="Real Estate Ad" loading="lazy" /></div>
         <div class="slide"><img src="images 2/final_ad_chiro_2_1780936780738.png" alt="Chiropractor Ad" loading="lazy" /></div>
         <div class="slide"><img src="images 2/ad_design_auto.png" alt="Auto Ad" loading="lazy" /></div>
         <div class="slide"><img src="images 2/Gemini_Generated_Image_h04od9h04od9h04o.png" alt="Finance Ad" loading="lazy" /></div>
-        <div class="slide"><img src="images/ad_dentist_1780938306516.png" alt="" loading="lazy" /></div>
+        <div class="slide"><img src="images/ad_dentist_1780938306516.png" alt="Dentist Ad" loading="lazy" /></div>
         <div class="slide"><img src="images 2/ad_design_storage.png" alt="Storage Ad" loading="lazy" /></div>
         <div class="slide"><img src="images 2/final_ad_event_2_1780936771081.png" alt="Event Ad" loading="lazy" /></div>
         <div class="slide"><img src="images 2/ad_design_realestate_1780794079702.png" alt="Real Estate Ad" loading="lazy" /></div>
-        <!-- Duplicate Set for seamless scrolling -->
-        <div class="slide" aria-hidden="true"><img src="images 2/ad_design_law_1780795178561.png" alt="Law Ad" loading="lazy" /></div>
-        <div class="slide" aria-hidden="true"><img src="images 2/ad_burger_1780938257426.png" alt="Burger Ad" loading="lazy" /></div>
-        <div class="slide" aria-hidden="true"><img src="images 2/ad_design_realestate.png" alt="Real Estate Ad" loading="lazy" /></div>
-        <div class="slide" aria-hidden="true"><img src="images 2/final_ad_chiro_2_1780936780738.png" alt="Chiropractor Ad" loading="lazy" /></div>
-        <div class="slide" aria-hidden="true"><img src="images 2/ad_design_auto.png" alt="Auto Ad" loading="lazy" /></div>
-        <div class="slide" aria-hidden="true"><img src="images 2/Gemini_Generated_Image_h04od9h04od9h04o.png" alt="Finance Ad" loading="lazy" /></div>
-        <div class="slide" aria-hidden="true"><img src="images/ad_dentist_1780938306516.png" alt="" loading="lazy" /></div>
-        <div class="slide" aria-hidden="true"><img src="images 2/ad_design_storage.png" alt="Storage Ad" loading="lazy" /></div>
-        <div class="slide" aria-hidden="true"><img src="images 2/final_ad_event_2_1780936771081.png" alt="Event Ad" loading="lazy" /></div>
-        <div class="slide" aria-hidden="true"><img src="images 2/ad_design_realestate_1780794079702.png" alt="Real Estate Ad" loading="lazy" /></div>
       </div>
     </div>
   </div>
@@ -989,7 +976,19 @@
   }, { threshold: 0.12 });
   revealEls.forEach(el => revealObs.observe(el));
 
-
+  // --- Slider Logic ---
+  const sliderContainer = document.getElementById('sliderContainer');
+  const sliderPrev = document.getElementById('sliderPrev');
+  const sliderNext = document.getElementById('sliderNext');
+  
+  if (sliderPrev && sliderNext && sliderContainer) {
+    sliderNext.addEventListener('click', () => {
+      sliderContainer.scrollBy({ left: sliderContainer.clientWidth, behavior: 'smooth' });
+    });
+    sliderPrev.addEventListener('click', () => {
+      sliderContainer.scrollBy({ left: -sliderContainer.clientWidth, behavior: 'smooth' });
+    });
+  }
 
   // Form toggle logic
   function toggleContactMethod(method) {
