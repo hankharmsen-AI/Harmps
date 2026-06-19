@@ -630,8 +630,11 @@
       .stat-item:nth-child(2)::after { display: none; }
       .why-grid { grid-template-columns: 1fr; }
       .why-card.featured { flex-direction: column; }
-      .slider-btn.prev { left: 10px; }
-      .slider-btn.next { right: 10px; }
+      .slider-wrapper { padding: 0; }
+      .slider-btn { display: none; }
+      .slider-container { gap: 12px; padding: 10px 6%; scroll-padding: 0 6%; }
+      .slide { flex: 0 0 88%; }
+      .slide img { box-shadow: 0 8px 20px rgba(0,0,0,0.5); }
       .pricing-grid { grid-template-columns: 1fr; max-width: 380px; }
       .location-layout { grid-template-columns: 1fr; }
       .contact-layout { grid-template-columns: 1fr; gap: 40px; }
